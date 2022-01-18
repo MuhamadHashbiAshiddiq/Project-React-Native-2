@@ -3,7 +3,11 @@ import styled from "styled-components";
 import { View, Text, StyleSheet } from "react-native";
 import { Card } from "react-native-paper";
 
-const Title = styled.Text`
+const RestaurantCard = styled(Card)``;
+
+const RestaurantCardCover = styled(Card.Cover)``;
+
+const Title = styled(Text)`
   padding: 16px;
   color: red;
 `;

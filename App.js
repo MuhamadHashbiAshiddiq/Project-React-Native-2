@@ -17,6 +17,7 @@ import {
 import { theme } from "./src/infrastructure/theme";
 import { RestaurantsScreen } from "./src/features/restaurants/screens/restaurants.screen";
 import { SafeArea } from "./src/components/utility/safe-area.component";
+import { restaurantsRequest } from "./src/services/restaurants/restaurants.service";
 
 const Tab = createBottomTabNavigator();
 

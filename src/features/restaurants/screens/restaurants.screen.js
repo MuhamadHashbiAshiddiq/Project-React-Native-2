@@ -1,6 +1,10 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { View, FlatList, Pressable } from "react-native";
+import {
+  View,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import {
   ActivityIndicator,
   Colors,
@@ -48,15 +52,17 @@ export const RestaurantsScreen = ({ navigation }) => {
         data={restaurants}
         renderItem={({ item }) => {
           return (
-            <Pressable
+            <TouchableOpacity
               onPress={() =>
-                navigation.navigate("RestaurantDetail")
+                navigation.navigate("RestaurantDetail", {
+                  restaurant: item,
+                })
               }
             >
               <Spacer position="bottom" size="large">
                 <RestaurantInfoCard restaurant={item} />
               </Spacer>
-            </Pressable>
+            </TouchableOpacity>
           );
         }}
         keyExtractor={(item) => item.name}

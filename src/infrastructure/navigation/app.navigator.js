@@ -3,6 +3,7 @@ import { Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
+import { TransitionPresets } from "@react-navigation/stack";
 
 import { RestaurantsNavigator } from "./restaurants.navigator";
 import { SafeArea } from "../../components/utility/safe-area.component";
@@ -31,6 +32,7 @@ const createScreenOptions = ({ route }) => {
   const iconName = TAB_ICON[route.name];
   return {
     headerShown: false,
+    ...TransitionPresets.ModalPresentationIOS,
     tabBarIcon: ({ size, color }) => (
       <Ionicons name={iconName} size={size} color={color} />
     ),

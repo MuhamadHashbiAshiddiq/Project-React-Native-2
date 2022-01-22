@@ -14,7 +14,7 @@ const SearchContainer = styled.View`
 
 export const Search = ({
   isFavoritesToggled,
-  onFavoritesToggled,
+  onFavoritesToggle,
 }) => {
   const { keyword, search } = useContext(LocationContext);
   const [searchKeyword, setSearchKeyword] =
@@ -30,7 +30,7 @@ export const Search = ({
         icon={
           isFavoritesToggled ? "heart" : "heart-outline"
         }
-        onIconPress={onFavoritesToggled}
+        onIconPress={onFavoritesToggle}
         placeholder="Search for a location"
         value={searchKeyword}
         onSubmitEditing={() => {

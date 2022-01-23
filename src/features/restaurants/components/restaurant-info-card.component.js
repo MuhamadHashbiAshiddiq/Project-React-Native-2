@@ -4,6 +4,7 @@ import { View } from "react-native";
 import { Card } from "react-native-paper";
 import { SvgXml } from "react-native-svg";
 
+import { Favorite } from "../../../components/favorites/favorite.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 import { Text } from "../../../components/typography/text.component";
 import star from "../../../../assets/star";
@@ -26,22 +27,22 @@ const Address = styled(Text)`
   font-size: ${(props) => props.theme.fontSizes.caption};
 `;
 
-const Info = styled(View)`
+const Info = styled.View`
   padding: ${(props) => props.theme.space[3]};
 `;
 
-const Rating = styled(View)`
+const Rating = styled.View`
   flex-direction: row;
   padding-top: ${(props) => props.theme.space[2]};
   padding-bottom: ${(props) => props.theme.space[2]};
 `;
 
-const Section = styled(View)`
+const Section = styled.View`
   flex-direction: row;
   align-items: center;
 `;
 
-const SectionEnd = styled(View)`
+const SectionEnd = styled.View`
   flex: 1;
   flex-direction: row;
   justify-content: flex-end;
@@ -67,16 +68,24 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
 
   return (
     <RestaurantCard elevation={5}>
-      <RestaurantCardCover
-        key={name}
-        source={{ uri: photos[0] }}
-      />
+      <View>
+        <Favorite restaurant={restaurant} />
+        <RestaurantCardCover
+          key={name}
+          source={{ uri: photos[0] }}
+        />
+      </View>
       <Info>
         <Text variant="label">{name}</Text>
         <Section>
           <Rating>
             {ratingArray.map((_, i) => (
-              <SvgXml key={`star-${placeId}-${i}`} xml={star} width={20} height={20} />
+              <SvgXml
+                key={`star-${placeId}-${i}`}
+                xml={star}
+                width={20}
+                height={20}
+              />
             ))}
           </Rating>
           <SectionEnd>

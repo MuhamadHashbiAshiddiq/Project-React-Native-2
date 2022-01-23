@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import { ThemeProvider } from "styled-components";
+import * as firebase from "firebase";
+
 import {
   useFonts as useOswald,
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
+
 import {
   useFonts as useLato,
   Lato_400Regular,
@@ -16,7 +19,42 @@ import { LocationContextProvider } from "./src/services/location/location.contex
 import { Navigation } from "./src/infrastructure/navigation";
 import { FavoritesContextProvider } from "./src/services/favorites/favorites.context";
 
+const firebaseConfig = {
+  apiKey: "AIzaSyAogKidsYNJl-f-Ny0tUtaTqxu9JUBikEA",
+  authDomain: "mealstogoreactnative-821cf.firebaseapp.com",
+  projectId: "mealstogoreactnative-821cf",
+  storageBucket: "mealstogoreactnative-821cf.appspot.com",
+  messagingSenderId: "437148232562",
+  appId: "1:437148232562:web:1c880e91923d9bbb34cbeb",
+  measurementId: "G-068PBXB0WJ",
+};
+
+// Initialize Firebase
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
 export default function App() {
+  const [isAuthenticated, setIsAuthenticated] =
+    useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(
+          "mo@binni.io",
+          "test123"
+        )
+        .then((user) => {
+          // console.log(user);
+          setIsAuthenticated(true);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }, 2000);
+  }, []);
+
   const [oswaldLoaded] = useOswald({
     Oswald_400Regular,
   });
@@ -28,6 +66,8 @@ export default function App() {
   if (!oswaldLoaded || !latoLoaded) {
     return null;
   }
+
+  if (!isAuthenticated) return null;
 
   return (
     <>
